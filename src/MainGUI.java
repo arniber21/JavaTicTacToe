@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class MainGUI {
+import javax.swing.*;
+
+public class MainGUI {
+    private JPanel gui;
 }
