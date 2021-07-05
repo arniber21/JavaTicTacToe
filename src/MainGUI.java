@@ -20,6 +20,7 @@ public class MainGUI extends JFrame{
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(gui);
+        initializeGame();
         this.pack();
         oneone.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -36,6 +37,37 @@ public class MainGUI extends JFrame{
                 setSquare(onethree);
             }
         });
+        twoone.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(twoone);
+            }
+        });
+
+        twotwo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(twotwo);
+            }
+        });
+        twothree.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(twothree);
+            }
+        });
+        threeone.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(threeone);
+            }
+        });
+        threetwo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(threetwo);
+            }
+        });
+        threethree.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setSquare(threethree);
+            }
+        });
     }
     public static void main(String[] args){
         JFrame window = new MainGUI("Tic Tac Toe");
@@ -43,10 +75,10 @@ public class MainGUI extends JFrame{
 
     }
     public void setSquare(JButton button){
-        if(button.getText() == "") {
+        if(button.getText() != "X" && button.getText() != "O") {
             if (playersTurn) {
                 button.setText("X");
-            } else {
+            } else if(!playersTurn) {
                 button.setText("O");
             }
             switchPosession();
@@ -55,10 +87,13 @@ public class MainGUI extends JFrame{
     public void switchPosession(){
         if(playersTurn){
             playersTurn = false;
+            StatusIndicator.setText("Player 2 turn!");
         }
         else{
             playersTurn = true;
+            StatusIndicator.setText("Player 1 turn!");
         }
+        checkWinner();
     }
     public void initializeGame(){
         playersTurn = true;
