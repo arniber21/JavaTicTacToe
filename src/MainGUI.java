@@ -14,6 +14,12 @@ public class MainGUI extends JFrame{
     private JButton threetwo;
     private JButton threeone;
     private JLabel StatusIndicator;
+    private JLabel p1wins;
+    private JLabel p2wins;
+    private JLabel ties;
+    int tiecounter = 0;
+    int p1wincounter = 0;
+    int p2wincounter = 0;
     boolean playersTurn;
     boolean game;
     public MainGUI(String title){
@@ -120,8 +126,23 @@ public class MainGUI extends JFrame{
     public boolean diagonal(){
         return oneone.getText() == "X" && twotwo.getText() == "X" && threethree.getText() == "X" || oneone.getText() == "O" && twotwo.getText() =="O" && threethree.getText() == "O" || onethree.getText() == "X" && twotwo.getText() == "X" && threeone.getText() == "X" || onethree.getText() == "O" && twotwo.getText() == "O" && threeone.getText() == "O";
     }
+    public boolean tie(){
+        return (oneone.getText() == "X" || oneone.getText() == "O") && (onetwo.getText() == "X" || onetwo.getText() == "O") && (onethree.getText() == "X" || onethree.getText() == "O") &&(twoone.getText() == "X" || twoone.getText() == "O") && (twotwo.getText() == "X" || twotwo.getText() == "O") &&(twothree.getText() == "X" || twothree.getText() == "O") && (threeone.getText() == "X" || threeone.getText() == "O") && (threetwo.getText() == "X" || threetwo.getText() == "O") && (threethree.getText() == "X" || threethree.getText() == "O");
+    }
     public void checkWinner(){
-        if(firstrow() || secondRow() || thirdRow() || firstcolumn() || secondcolumn() || thirdcolumn() || diagonal()){
+        if((firstrow() && oneone.getText() == "X")|| (secondRow() && twoone.getText() == "X") || (thirdRow() && threeone.getText() == "X") || (firstcolumn() && oneone.getText() == "X") || (secondcolumn() && onetwo.getText() == "X") || (thirdcolumn() && onethree.getText() == "X") || (diagonal() && twotwo.getText() == "X")){
+            p1wincounter++;
+            p1wins.setText("Player 1 wins: " + p1wincounter);
+            endGame();
+        }
+        else if(tie()){
+            endGame();
+            tiecounter++;
+            ties.setText("Ties: " + tiecounter);
+        }
+        else if ((firstrow() && oneone.getText() == "O")|| (secondRow() && twoone.getText() == "O") || (thirdRow() && threeone.getText() == "O") || (firstcolumn() && oneone.getText() == "O") || (secondcolumn() && onetwo.getText() == "O") || (thirdcolumn() && onethree.getText() == "O") || (diagonal() && twotwo.getText() == "O")){
+            p2wincounter++;
+            p2wins.setText("Player 2 wins: " + p2wincounter);
             endGame();
         }
     }
